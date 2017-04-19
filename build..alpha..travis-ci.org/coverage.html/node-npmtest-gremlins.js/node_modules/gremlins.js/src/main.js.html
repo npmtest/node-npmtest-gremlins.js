@@ -1,0 +1,1754 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-gremlins.js/node_modules/gremlins.js/src/main.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-gremlins.js">npmtest-gremlins.js (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-gremlins.js/node_modules/gremlins.js/src/main.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">2.38% <small>(2 / 84)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">2.44% <small>(2 / 82)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-gremlins.js/node_modules/gremlins.js/src/</a> &#187; main.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * gremlins.js 0.1.0 Copyright (c) 2014, marmelab
+ * Available via the MIT license.
+ * see: http://github.com/marmelab/gremlins.js for details
+ */
+define(<span class="fstat-no" title="function not covered" >function(require) {</span>
+    "use strict";
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var Chance = require('./vendor/chance');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var gremlins = {</span>
+        species: {
+            clicker:    require('./species/clicker'),
+            formFiller: require('./species/formFiller'),
+            scroller:   require('./species/scroller'),
+            typer:      require('./species/typer')
+        },
+        mogwais: {
+            alert:      require('./mogwais/alert'),
+            fps:        require('./mogwais/fps'),
+            gizmo:      require('./mogwais/gizmo')
+        },
+        strategies: {
+            allTogether:  require('./strategies/allTogether'),
+            bySpecies:    require('./strategies/bySpecies'),
+            distribution: require('./strategies/distribution')
+        }
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var executeInSeries = require('./utils/executeInSeries');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var GremlinsHorde = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._gremlins = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._mogwais = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._strategies = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._beforeCallbacks = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._afterCallbacks = [];</span>
+<span class="cstat-no" title="statement not covered" >        this._logger = console; </span>// logs to console by default
+<span class="cstat-no" title="statement not covered" >        this._randomizer = new Chance();</span>
+    };
+&nbsp;
+    /**
+     * Add a gremlin to the horde.
+     *
+     * A gremlin is nothing more than a function. Gremlins mess up with the
+     * application in order to test its robustness. Once unleased, the horde
+     * executes each gremlin function several times (see unleash()).
+     *
+     *   horde.gremlin(function() {
+     *     // do nasty things to the application
+     *   });
+     * 
+     * The gremlins object contains a few gremlin species than you can add:
+     *
+     *   horde.gremlin(gremlins.species.clicker());
+     *
+     * A gremlin can be asynchronous if it takes an argument, which means that
+     * the horde is paused until the argument is executed.
+     *
+     *   horde.gremlin(function(done) {
+     *     // do nasty things to the application asynchronously
+     *     done();
+     *   });
+     *
+     * If the gremlin provides a logger() function, the horde logger object is
+     * injected, to allow the gremlin to record activity.
+     *
+     *
+     * If the gremlin provides a randomizer() function, the horde randomizer
+     * object is injected, to allow the gremlin to generate random data in a
+     * repeatable way.
+     *
+     * Here is a more sophisticated gremlin function example:
+     *
+     *   var logger;
+     *   function arrayDestroyer() {
+     *     Array.prototype.indexOf = function() { return 42; };
+     *     if (logger &amp;&amp; logger.log) {
+     *       logger.log('All arrays are now equal');
+     *     }
+     *   });
+     *   arrayDestroyer.logger = function(loggerObject) {
+     *     logger = loggerObject;
+     *   };
+     *   horde.gremlin(arrayDestroyer);
+     *
+     * Gremlin functions are executed in the context of the horde, however it
+     * is a good practice to avoid using "this" inside gremlin functions to
+     * allow standalone gremlin execution, and to ease debugging.
+     *
+     *   horde.gremlin(function() {
+     *     var oldIndexOf = Array.prototype.indexOf;
+     *     Array.prototype.indexOf = function() { return 42; };
+     *     // "this" is the horde
+     *     this.after(function(){
+     *       array.prototype.indexOf = oldIndexOf;
+     *     });
+     *   });
+     *
+     * If a horde is unleashed without manually adding at least a single
+     * gremlin, all the default gremlin species are added (see allGremlins()).
+     *
+     * @param {Function} gremlin - A callback to be executed to mess up the app
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.gremlin = <span class="fstat-no" title="function not covered" >function(gremlin) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._gremlins.push(gremlin);</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Add all the registered gremlin species to the horde.
+     * 
+     * The gremlin species are available in gremlins.species. You can add your
+     * own easily:
+     * 
+     *   gremlins.species.greenMutant = function(logger) { //... };
+     *
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.allGremlins = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        for (var gremlinName in gremlins.species) {</span>
+<span class="cstat-no" title="statement not covered" >            this.gremlin(gremlins.species[gremlinName]());</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Add a mogwai to the horde.
+     *
+     * A mogwai is nothing more than a function. Mogwais monitor application
+     * activity in order to detect when gremlins do damages. Contrary to 
+     * gremlins, mogwais should do no harm to the current application.
+     *
+     *   // this example mogwai monitors javascript alerts
+     *   horde.mogwai(function() {
+     *     var oldAlert = window.alert;
+     *     window.alert = function(message) {
+     *       // do stuff
+     *       oldAlert(message);
+     *     }      
+     *   });
+     *
+     * The gremlins object contains a few mogwai species than you can add:
+     *
+     *   horde.mogwai(gremlins.mogwais.alert());
+     * 
+     * Mogwais are called once before the horde is unleashed. Just like a
+     * before() callback, a mogwai can be synchronous or asynchronous.
+     *
+     * What distinguishes a mogwai function from a simple before() function
+     * is that mogwai functions can provide a cleanUp() function to be called
+     * once after the gremlins finished their job.
+     * 
+     * When added, if the mogwai provides a logger() function, the horde
+     * logger object is injected, to allow the mogwai to record activity.
+     *
+     * Here is a more sophisticated mogwai function example:
+     *
+     *   var oldAlert = window.alert;
+     *   var logger;
+     *   function alert() {
+     *     window.alert = function(message) {
+     *       oldAlert(message);
+     *       if (logger &amp;&amp; logger.log) {
+     *         logger.log('alert', msg);
+     *       }
+     *     }      
+     *   });
+     *   alert.cleanUp = function() {
+     *     window.alert = oldAlert;
+     *   };
+     *   alert.logger = function(loggerObject) {
+     *     logger = loggerObject;
+     *   };
+     *   horde.mogwai(alert);
+     *
+     * The cleanUp() and logger() support for mogwais allow to build
+     * sophisticated monitoring features without using "this", and make
+     * the mogwais portable and testable.
+     *
+     * If a horde is unleashed without manually adding at least a single
+     * mogwai, all the default mogwai species are added (see allMogwais()).
+     *
+     * If you want to disable default mogwais, just add an empty function.
+     *
+     *   horde.mogwai(function() {});
+     *
+     * @param {Function} mogwai - A callback to be executed when the test starts
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.mogwai = <span class="fstat-no" title="function not covered" >function(mogwai) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._mogwais.push(mogwai);</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Add all the registered mogwai species to the horde.
+     * 
+     * The mogwai species are available in gremlins.mogwais. You can add your
+     * own easily:
+     * 
+     *   gremlins.mogwais.gizmo = function() { //... };
+     *
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.allMogwais = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        for (var mogwaiName in gremlins.mogwais) {</span>
+<span class="cstat-no" title="statement not covered" >            this.mogwai(gremlins.mogwais[mogwaiName]());</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Add an attack strategy to run gremlins.
+     *
+     * A strategy is an asynchronous function taking the following arguments:
+     *  - gremlins: array of gremlin species added to the horde
+     *  - params: the parameters passed as first argument of unleash()
+     *  - done: a callback to execute once the strategy is finished
+     * 
+     * A strategy function executes registered gremlins in a certain order,
+     * a certain number of times.
+     *
+     *   horde.strategy(function allAtOnceStrategy(gremlins, params, done) {
+     *     gremlins.forEach(function(gremlin) {
+     *       gremlin.apply(horde);
+     *     });
+     *     done();
+     *   });
+     *
+     * The gremlins object contains a few strategies than you can add:
+     *
+     *   horde.strategy(gremlins.strategies.bySpecies());
+     *
+     * You can add several strategies by calling strategy() more than once.
+     * They will be executed in the order they were registered.
+     *
+     * If a horde is unleashed without manually adding at least a single
+     * strategy, all the default strategy (allTogether) is used.
+     *
+     * @param {Function} strategy - A callback to be executed when the test starts
+     * @return {GremlinsHorde} 
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.strategy = <span class="fstat-no" title="function not covered" >function(strategy) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._strategies.push(strategy);</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Add a callback to be executed before gremlins are unleashed.
+     *
+     * Use it to setup the page before the stress test (disable some features,
+     * set default data, bootstrap the application, start a profiler).
+     *
+     *   horde.before(function() {
+     *     console.profile('gremlins'); // start the Chrome profiler
+     *   });
+     * 
+     * If the callback takes no argument, it is executed synchronously.
+     *
+     *   horde.before(function() {
+     *     // do things synchronously
+     *   });
+     *
+     * If the callback takes an argument, it is executed asynchronously, which
+     * means that the horde is paused until the argument is executed.
+     *
+     *   horde.before(function(done) {
+     *     // do things asynchronously
+     *     done();
+     *   });
+     *
+     * before() callbacks are executed in the context of the horde.
+     *
+     *   horde.before(function() {
+     *     // "this" is the horde
+     *     this.log('Preparing the attack');
+     *   });
+     *
+     * You can add several callbacks by calling before() more than once.
+     * They will be executed in the order they were registered.
+     *
+     * @param {Function} beforeCallback - A callback to be executed before the stress test
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.before = <span class="fstat-no" title="function not covered" >function(beforeCallback) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._beforeCallbacks.push(beforeCallback);</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Add a callback to be executed after gremlins finished their job.
+     *
+     * Use it to collect insights of the gremlins activity, stop a profiler,
+     * or re-enable features that were disabled for the test.
+     *
+     *   horde.after(function() {
+     *     console.profileEnd(); // stop the Chrome profiler
+     *   });
+     * 
+     * If the callback takes no argument, it is executed synchronously.
+     *
+     *   horde.after(function() {
+     *     // do things synchronously
+     *   });
+     *
+     * If the callback takes an argument, it is executed asynchronously, which
+     * means that the horde is paused until the argument is executed.
+     *
+     *   horde.after(function(done) {
+     *     // do things asynchronously
+     *     done();
+     *   });
+     *
+     * after() callbacks are executed in the context of the horde.
+     *
+     *   horde.after(function() {
+     *     // "this" is the horde
+     *     this.log('Cleaning up the mess after the attack');
+     *   });
+     *
+     * You can add several callbacks by calling after() more than once.
+     * They will be executed in the order they were registered.
+     *
+     * @param {Function} afterCallback - A callback to be executed at the end of the stress test
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.after = <span class="fstat-no" title="function not covered" >function(afterCallback) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._afterCallbacks.push(afterCallback);</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Set the logger object to use for logging.
+     *
+     * When called with no parameter, return the current logger.
+     * 
+     * The logger object must provide 4 functions: log, info, warn, and error.
+     * 
+     *   var consoleLogger = {
+     *       log:   console.log.bind(console),
+     *       info:  console.info.bind(console),
+     *       warn:  console.warn.bind(console),
+     *       error: console.error.bind(console)
+     *   };
+     *   horde.logger(consoleLogger);
+     *
+     * The logger object is injected to mogwais, and to gremlins.
+     *
+     * By default, a horde uses the global console object as logger.
+     *
+     * @param {Object} [logger] - A logger object
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.logger = <span class="fstat-no" title="function not covered" >function(logger) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!arguments.length) <span class="cstat-no" title="statement not covered" >return this._logger;</span></span>
+<span class="cstat-no" title="statement not covered" >        this._logger = logger;</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Shortcut to the logger's log() method.
+     *
+     * Mostly useful for before() and after() callbacks. Only supports a
+     * single argument.
+     *
+     * @param {String} msg The message to log
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.log = <span class="fstat-no" title="function not covered" >function(msg) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._logger.log(msg);</span>
+    };
+&nbsp;
+    /**
+     * Set the randomizer object to use for generating random data.
+     *
+     * When called with no parameter, return the current randomizer.
+     *
+     * The randomizer object must be compatible with chance.js.
+     *
+     * The randomizer object is injected to mogwais, and to gremlins.
+     *
+     * By default, a horde uses a new Chance object as logger.
+     *
+     * @param {Object} [randomizer] - A randomizer object
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.randomizer = <span class="fstat-no" title="function not covered" >function(randomizer) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!arguments.length) <span class="cstat-no" title="statement not covered" >return this._randomizer;</span></span>
+<span class="cstat-no" title="statement not covered" >        this._randomizer = randomizer;</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Seed the random number generator
+     *
+     * Useful to generate repeatable random results actions.
+     *
+     * You can pass either an integer, or a random data generator callback
+     *
+     * @see Chance() constructor
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.seed = <span class="fstat-no" title="function not covered" >function(seed) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._randomizer = new Chance(seed);</span>
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    /**
+     * Start the stress test by executing gremlins according to the strategies
+     * 
+     * Gremlins and mogwais do nothing until the horde is unleashed.
+     * When unleashing, you can pass parameters to the strategies, such as the
+     * number of gremlin waves in the default strategy.
+     *
+     *   horde.unleash({ nb: 50 }); // all gremlins will attack 50 times
+     * 
+     * unleash() executes asynchronously, so you must use the second argument
+     * if you need to execute code after the stress test.
+     *
+     *   horde.unleash({}, function() {
+     *     console.log('Phew! Stress test is over.');
+     *   });
+     *
+     * Alternately, you can use the after() method.
+     *
+     *   horde
+     *     .after(function() {
+     *       console.log('Phew! Stress test is over.');
+     *     })
+     *     .unleash();
+     *
+     * @param {Object} [params] - A list of parameters passed to each strategy.
+     * @param {Function} [done] - A callback to be executed once the stress test is over
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.unleash = <span class="fstat-no" title="function not covered" >function(params, done) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this._gremlins.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            this.allGremlins();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (this._mogwais.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            this.allMogwais();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (this._strategies.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            this.strategy(gremlins.strategies.distribution());</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var gremlinsAndMogwais = [].concat(this._gremlins, this._mogwais);</span>
+<span class="cstat-no" title="statement not covered" >        var allCallbacks = gremlinsAndMogwais.concat(this._strategies, this._beforeCallbacks, this._afterCallbacks);</span>
+<span class="cstat-no" title="statement not covered" >        inject({'logger': this._logger, 'randomizer': this._randomizer}, allCallbacks);</span>
+<span class="cstat-no" title="statement not covered" >        var beforeCallbacks = this._beforeCallbacks;</span>
+<span class="cstat-no" title="statement not covered" >        beforeCallbacks = beforeCallbacks.concat(this._mogwais);</span>
+<span class="cstat-no" title="statement not covered" >        var afterCallbacks  = this._afterCallbacks;</span>
+<span class="cstat-no" title="statement not covered" >        for (var i = 0, count = gremlinsAndMogwais.length; i &lt; count; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            if (typeof gremlinsAndMogwais[i].cleanUp == 'function') {</span>
+<span class="cstat-no" title="statement not covered" >                afterCallbacks.push(gremlinsAndMogwais[i].cleanUp);</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var horde = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        executeInSeries(beforeCallbacks, [], horde, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            executeInSeries(horde._strategies, [horde._gremlins, params], horde, <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                executeInSeries(afterCallbacks, [], horde, <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (typeof done === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >                        done();</span>
+                    }
+                });
+            });
+        });
+    };
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function inject(services, objects) {</span>
+<span class="cstat-no" title="statement not covered" >        for (var i = 0, count = objects.length; i &lt; count; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            for (var name in services) {</span>
+<span class="cstat-no" title="statement not covered" >                if (typeof objects[i][name] === "function") {</span>
+<span class="cstat-no" title="statement not covered" >                    objects[i][name](services[name]);</span>
+                }
+            }
+        }
+    }
+&nbsp;
+    /**
+     * Stop a running test
+     *
+     * Delegate the stop message to all registered strategies. Calling
+     * this method before starting the test or after it is finished has
+     * no effect.
+     *
+     * stop() will only work properly if strategies implement their own stop()
+     * method.
+     */
+<span class="cstat-no" title="statement not covered" >    GremlinsHorde.prototype.stop = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        var strategies = this._strategies;</span>
+<span class="cstat-no" title="statement not covered" >        for (var i = 0, count = strategies.length; i &lt; count; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            strategies[i].stop();</span>
+        }
+    };
+&nbsp;
+    /**
+     * Get a new horde instance
+     *
+     * @return {GremlinsHorde}
+     */
+<span class="cstat-no" title="statement not covered" >    gremlins.createHorde = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        return new GremlinsHorde();</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return gremlins;</span>
+&nbsp;
+});
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 15:54:02 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
